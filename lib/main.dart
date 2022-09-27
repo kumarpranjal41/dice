@@ -1,42 +1,44 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:flutter/services.dart';
-
 void main() {
-  return runApp(
-    MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 247, 38, 38),
-        appBar: AppBar(
-          title: const Text("dicee"),
-          titleSpacing: 00.0,
-          centerTitle: true,
-          toolbarHeight: 60.2,
-          toolbarOpacity: 0.8,
-          shape: const RoundedRectangleBorder(
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false, //removed DEBUGED BANNER
+
+    home: Scaffold(
+      backgroundColor: Colors.green,
+      appBar: AppBar(
+        elevation: 15,
+        backgroundColor: Colors.yellow,
+        title: Text('pranjal kumar'),
+        centerTitle: true,
+        leading: Icon(Icons.arrow_back_ios_new),
+        actions: [Icon(Icons.search)],
+        shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(25),
-                bottomLeft: Radius.circular(25)),
-          ),
-          elevation: 0.00,
-          backgroundColor: Color.fromARGB(255, 108, 176, 221),
+                bottomLeft: Radius.circular(1000),
+                bottomRight: Radius.circular(2000))),
+        bottom: PreferredSize(
+          child: SizedBox(),
+          preferredSize: Size.fromHeight(200),
         ),
-        body: DicePage(),
       ),
+      body: dicepage(),
     ),
-  );
+  ));
 }
 
-class DicePage extends StatefulWidget {
+class dicepage extends StatefulWidget {
+  const dicepage({super.key});
+
   @override
-  State<DicePage> createState() => _DicePageState();
+  State<dicepage> createState() => _dicepageState();
 }
 
-class _DicePageState extends State<DicePage> {
+class _dicepageState extends State<dicepage> {
   @override
-  int leftdicenumber = 3;
-  int rightdicenumber = 2;
+  int leftdicenumber = 2;
+  int rightdicenumber = 3;
   Widget build(BuildContext context) {
     return Center(
       child: Row(
@@ -46,31 +48,28 @@ class _DicePageState extends State<DicePage> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextButton(
-                onPressed: () {
+                onPressed: (() {
                   setState(() {
                     leftdicenumber = Random().nextInt(6) + 1;
-                    print('dicenumber = $leftdicenumber');
+                    print('dice number = $leftdicenumber');
                   });
-                },
+                }),
                 child: Image.asset('images/dice$leftdicenumber.png'),
               ),
             ),
           ),
           Expanded(
-            flex: 1,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    rightdicenumber = Random().nextInt(6) + 1;
-                    print('right');
-                  });
-                },
-                child: Image.asset('images/dice$rightdicenumber.png'),
-              ),
+                  onPressed: (() {
+                    setState(() {
+                      rightdicenumber = Random().nextInt(6) + 1;
+                    });
+                  }),
+                  child: Image.asset('images/dice$rightdicenumber.png')),
             ),
-          ),
+          )
         ],
       ),
     );
